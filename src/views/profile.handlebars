@@ -1,0 +1,21 @@
+<h2>Perfil</h2>
+
+<div class="divProfile">
+    <div>
+        <p>Bienvenido/a {{{user.firstName}}} {{{user.lastName}}}!!! </p>
+    </div>
+
+    <div class="divInfoProfile">
+        <h4>Mis datos</h4>
+        <p>Email: {{user.email}}</p>
+        <p>Edad: {{user.age}} años</p>
+        <p>Rol: {{user.role}}</p>
+    </div>
+
+    <div>
+        <form action="/api/sessions/logout" method="POST">
+            <button type="submit" id="btnLogout" class="btn">Cerrar sesión</button>
+        </form>
+    </div>
+</div>
+
