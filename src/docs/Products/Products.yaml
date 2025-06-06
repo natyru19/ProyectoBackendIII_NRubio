@@ -1,0 +1,115 @@
+paths:
+  /api/products:
+    get:
+      summary: Obtenemos todos los productos correctamente
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Se obtienen todos los productos correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+        "500":
+          description: Error interno del servidor
+    post:
+      summary: Este endpoint crea un producto
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/createProd"
+      responses:
+        "201":
+          description: Producto creado con éxito
+        "500":
+          description: Error interno del servidor
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID autogenerado por MongoDB
+        title:
+          type: string
+          description: Nombre del producto
+        description:
+          type: string
+          description: Descripción del producto
+        code:
+          type: string
+          description: Código del producto
+        price:
+          type: number
+          description: Precio del producto
+        status:
+          type: boolean
+          description: Estado del producto (activo/inactivo)
+        stock:
+          type: number
+          description: Stock disponible
+        category:
+          type: string
+          description: Categoría del producto
+        thumbnails:
+          type: array
+          items:
+            type: string
+          description: Imágenes del producto
+      example:
+        _id: "679a2f03e9e57a3feb941c15"
+        title: Laptop HP
+        description: Laptop con procesador i7 y 16GB de RAM
+        code: "2"
+        price: 799
+        status: true
+        stock: 10
+        category: computación
+        thumbnails: []
+  requestBodies:
+    createProd:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Nombre del producto
+        description:
+          type: string
+          description: Descripción del producto
+        code:
+          type: string
+          description: Código del producto
+        price:
+          type: number
+          description: Precio del producto
+        status:
+          type: boolean
+          description: Estado del producto
+        stock:
+          type: number
+          description: Stock del producto
+        category:
+          type: string
+          description: Categoría del producto
+        thumbnails:
+          type: array
+          items:
+            type: string
+          description: URLs de imágenes del producto
+      example:
+        title: Mouse Gamer
+        description: Mouse con sensor óptico de alta precisión
+        code: "MOUSE123"
+        price: 25.5
+        status: true
+        stock: 100
+        category: accesorios
+        thumbnails: []

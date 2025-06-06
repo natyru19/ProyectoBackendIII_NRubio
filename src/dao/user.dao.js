@@ -15,6 +15,10 @@ class UserDao {
         return await user.save();
     }
 
+    async get() {
+    return await UserModel.find();
+  }
+
 }
 
 export default new UserDao();

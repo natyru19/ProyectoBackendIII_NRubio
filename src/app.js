@@ -13,11 +13,14 @@ import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import config from "./config/config.js";
 import session from "express-session";
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUiExpress from "swagger-ui-express";
 
 const app = express();
 const PORT = config.port;
 const productManager = new ProductManager();
 const instanceDB = DataBase.getInstance();
+
 
 // Middleware
 app.use(express.json());
@@ -46,6 +49,22 @@ app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/api/sessions", sessionsRouter);
 app.use("/api/mocks", mocksRouter);
+
+const swaggerOptions = {
+    definition: {
+        openapi: "3.0.1",
+        info: {
+            title: "Documentación de la App ProyectoBackendIII", 
+            description: "App dedicada a vender productos de buena calidad!"
+        }
+    }, 
+    apis: ["./src/docs/**/*.yaml"]
+}
+
+const specs = swaggerJSDoc(swaggerOptions);
+
+app.use("/apidocs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
+
 
 
 // La app escuchando en el puerto 8080 (el que se le indica)

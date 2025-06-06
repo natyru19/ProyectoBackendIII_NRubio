@@ -75,7 +75,7 @@ class ProductController {
     
         try {
             const newProduct = req.body;
-            const process = await productService.addProduct(newProduct);
+            const process = await productService.createProduct(newProduct);
     
             if(process){
                 return res.status(201).json({status: "success", message: "Se agregó el producto correctamente", data: process});
